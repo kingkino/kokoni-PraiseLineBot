@@ -1,0 +1,92 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "storageAccounts_functionc44de7c49fd5_name": {
+            "defaultValue": "functionc44de7c49fd5",
+            "type": "String"
+        },
+        "serverfarms_JapanEastPlan_name": {
+            "defaultValue": "JapanEastPlan",
+            "type": "String"
+        },
+        "sites_templatesample_name": {
+            "defaultValue": "templatesample",
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "comments": "リソース '/subscriptions/b70049f2-c132-422f-9143-a98ebb0ea9ae/resourceGroups/sample-template/providers/Microsoft.Storage/storageAccounts/functionc44de7c49fd5' から一般化されました。",
+            "type": "Microsoft.Storage/storageAccounts",
+            "sku": {
+                "name": "Standard_LRS",
+                "tier": "Standard"
+            },
+            "kind": "Storage",
+            "name": "[parameters('storageAccounts_functionc44de7c49fd5_name')]",
+            "apiVersion": "2016-01-01",
+            "location": "japaneast",
+            "tags": {},
+            "properties": {},
+            "dependsOn": []
+        },
+        {
+            "comments": "リソース '/subscriptions/b70049f2-c132-422f-9143-a98ebb0ea9ae/resourceGroups/sample-template/providers/Microsoft.Web/serverfarms/JapanEastPlan' から一般化されました。",
+            "type": "Microsoft.Web/serverfarms",
+            "sku": {
+                "name": "Y1",
+                "tier": "Dynamic",
+                "size": "Y1",
+                "family": "Y",
+                "capacity": 0
+            },
+            "kind": "functionapp",
+            "name": "[parameters('serverfarms_JapanEastPlan_name')]",
+            "apiVersion": "2015-08-01",
+            "location": "Japan East",
+            "properties": {
+                "name": "[parameters('serverfarms_JapanEastPlan_name')]",
+                "numberOfWorkers": 0
+            },
+            "dependsOn": []
+        },
+        {
+            "comments": "リソース '/subscriptions/b70049f2-c132-422f-9143-a98ebb0ea9ae/resourceGroups/sample-template/providers/Microsoft.Web/sites/templatesample' から一般化されました。",
+            "type": "Microsoft.Web/sites",
+            "kind": "functionapp",
+            "name": "[parameters('sites_templatesample_name')]",
+            "apiVersion": "2015-08-01",
+            "location": "Japan East",
+            "properties": {
+                "name": "[parameters('sites_templatesample_name')]",
+                "hostNames": [
+                    "templatesample.azurewebsites.net"
+                ],
+                "enabledHostNames": [
+                    "templatesample.azurewebsites.net",
+                    "templatesample.scm.azurewebsites.net"
+                ],
+                "hostNameSslStates": [
+                    {
+                        "name": "[concat(parameters('sites_templatesample_name'),'.azurewebsites.net')]",
+                        "sslState": 0,
+                        "thumbprint": null,
+                        "ipBasedSslState": 0
+                    },
+                    {
+                        "name": "[concat(parameters('sites_templatesample_name'),'.scm.azurewebsites.net')]",
+                        "sslState": 0,
+                        "thumbprint": null,
+                        "ipBasedSslState": 0
+                    }
+                ],
+                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_JapanEastPlan_name'))]"
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_JapanEastPlan_name'))]"
+            ]
+        }
+    ]
+}

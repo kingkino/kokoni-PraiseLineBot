@@ -18,7 +18,6 @@
     "variables": {},
     "resources": [
         {
-            "comments": "リソース '/subscriptions/b70049f2-c132-422f-9143-a98ebb0ea9ae/resourceGroups/sample-template/providers/Microsoft.Storage/storageAccounts/functionc44de7c49fd5' から一般化されました。",
             "type": "Microsoft.Storage/storageAccounts",
             "sku": {
                 "name": "Standard_LRS",
@@ -33,7 +32,6 @@
             "dependsOn": []
         },
         {
-            "comments": "リソース '/subscriptions/b70049f2-c132-422f-9143-a98ebb0ea9ae/resourceGroups/sample-template/providers/Microsoft.Web/serverfarms/JapanEastPlan' から一般化されました。",
             "type": "Microsoft.Web/serverfarms",
             "sku": {
                 "name": "Y1",
@@ -53,7 +51,6 @@
             "dependsOn": []
         },
         {
-            "comments": "リソース '/subscriptions/b70049f2-c132-422f-9143-a98ebb0ea9ae/resourceGroups/sample-template/providers/Microsoft.Web/sites/templatesample' から一般化されました。",
             "type": "Microsoft.Web/sites",
             "kind": "functionapp",
             "name": "[parameters('sites_templatesample_name')]",

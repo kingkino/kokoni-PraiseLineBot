@@ -1,0 +1,92 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "storageAccounts_name": {
+            "defaultValue": "samplelinebot",
+            "type": "String"
+        },
+        "serverfarms_Plan_name": {
+            "defaultValue": "JapanEastPlan",
+            "type": "String"
+        },
+        "sites_name": {
+            "defaultValue": "sample-linebot",
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "comments": "リソース '/subscriptions/b70049f2-c132-422f-9143-a98ebb0ea9ae/resourceGroups/sample-linbot/providers/Microsoft.Storage/storageAccounts/samplelinebot' から一般化されました。",
+            "type": "Microsoft.Storage/storageAccounts",
+            "sku": {
+                "name": "Standard_LRS",
+                "tier": "Standard"
+            },
+            "kind": "Storage",
+            "name": "[parameters('storageAccounts_samplelinebot_name')]",
+            "apiVersion": "2016-01-01",
+            "location": "japaneast",
+            "tags": {},
+            "properties": {},
+            "dependsOn": []
+        },
+        {
+            "comments": "リソース '/subscriptions/b70049f2-c132-422f-9143-a98ebb0ea9ae/resourceGroups/Sample-Linbot/providers/Microsoft.Web/serverfarms/JapanEastPlan' から一般化されました。",
+            "type": "Microsoft.Web/serverfarms",
+            "sku": {
+                "name": "Y1",
+                "tier": "Dynamic",
+                "size": "Y1",
+                "family": "Y",
+                "capacity": 0
+            },
+            "kind": "functionapp",
+            "name": "[parameters('serverfarms_JapanEastPlan_name')]",
+            "apiVersion": "2015-08-01",
+            "location": "Japan East",
+            "properties": {
+                "name": "[parameters('serverfarms_JapanEastPlan_name')]",
+                "numberOfWorkers": 0
+            },
+            "dependsOn": []
+        },
+        {
+            "comments": "リソース '/subscriptions/b70049f2-c132-422f-9143-a98ebb0ea9ae/resourceGroups/Sample-Linbot/providers/Microsoft.Web/sites/sample-linebot' から一般化されました。",
+            "type": "Microsoft.Web/sites",
+            "kind": "functionapp",
+            "name": "[parameters('sites_sample_linebot_name')]",
+            "apiVersion": "2015-08-01",
+            "location": "Japan East",
+            "properties": {
+                "name": "[parameters('sites_sample_linebot_name')]",
+                "hostNames": [
+                    "sample-linebot.azurewebsites.net"
+                ],
+                "enabledHostNames": [
+                    "sample-linebot.azurewebsites.net",
+                    "sample-linebot.scm.azurewebsites.net"
+                ],
+                "hostNameSslStates": [
+                    {
+                        "name": "[concat(parameters('sites_sample_linebot_name'),'.azurewebsites.net')]",
+                        "sslState": 0,
+                        "thumbprint": null,
+                        "ipBasedSslState": 0
+                    },
+                    {
+                        "name": "[concat(parameters('sites_sample_linebot_name'),'.scm.azurewebsites.net')]",
+                        "sslState": 0,
+                        "thumbprint": null,
+                        "ipBasedSslState": 0
+                    }
+                ],
+                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_JapanEastPlan_name'))]"
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_JapanEastPlan_name'))]"
+            ]
+        }
+    ]
+}
